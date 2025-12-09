@@ -26,76 +26,107 @@ const Page3 = (props) => {
   //组件初始化
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
-  const globalDataBindData = useSelector(state => state.globalDataBind.data);
+  const parameterBindData = useSelector(state => state.parameterBind.data);
+  const isMobile = useSelector(state => state.globalData.isMobile);
 
   //useState
 
   //useEffect
   //modal初始化
   useEffect(() => {
-    console.log("Home");
   }, []);
 
   //func
 
   return (
-    <div id="Page3" className="Page3" style={{ padding: '6rem 10rem', gap: '2rem' }}>
+    <div id="Page3" className="Page3" style={
+      isMobile ? {
+        padding: '3rem 2rem',
+        gap: '2rem'
+      } : {
+        padding: '6rem 10rem',
+        gap: '2rem'
+      }
+    }>
       <div
-        style={{
-          position: "relative",
-          display: 'inner-flex',
-          fontSize: '4rem',
-          fontWeight: 'bold',
-          color: 'white',
-          letterSpacing: '0.2rem',
-          marginBottom: '2rem'
-        }}>
+        style={
+          isMobile ? {
+            position: "relative",
+            display: 'inner-flex',
+            fontSize: '2.5rem',
+            fontWeight: 'bold',
+            color: 'white',
+            letterSpacing: '0.2rem',
+            textAlign: 'center'
+          } : {
+            position: "relative",
+            display: 'inner-flex',
+            fontSize: '4rem',
+            fontWeight: 'bold',
+            color: 'white',
+            letterSpacing: '0.2rem',
+            marginBottom: '2rem'
+          }
+        }>
         <TextBind
-          data={globalDataBindData}
+          data={parameterBindData}
           bindTitle="页面3主标题"
           bindCode="page3_main_title__text"
         />
-        {getValue(globalDataBindData, 'page3_main_title__text') || '解决方案'}
-      </div>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "40rem",
-          marginBottom: '4rem',
-          borderRadius: "2rem",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          className='imageBox'
-          style={{
-            backgroundImage: `url(${getValue(globalDataBindData, 'page3_main_image__image') || '/image/background.jpg'})`,
-          }}
-        />
-        <ImageBind
-          bindCode="page3_main_image__image"
-          bindTitle="页面3主背景图片"
-          data={globalDataBindData}
-          style={{ right: '2rem', top: '2rem' }}
-        />
+        {getValue(parameterBindData, 'page3_main_title__text') || '解决方案'}
       </div>
 
+      {/* 展示图片(PC端显示) */}
+      {
+        (!isMobile) ? (
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "40rem",
+              marginBottom: '4rem',
+              borderRadius: "2rem",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              className='imageBox'
+              style={{
+                backgroundImage: `url(${getValue(parameterBindData, 'page3_main_image__image') || '/image/background.jpg'})`,
+              }}
+            />
+            <ImageBind
+              bindCode="page3_main_image__image"
+              bindTitle="页面3主背景图片"
+              data={parameterBindData}
+              style={{ right: '2rem', top: '2rem' }}
+            />
+          </div>
+        ) : null
+      }
+
       <div
-        style={{
-          position: "relative",
-          display: 'flex',
-          flexFlow: 'column',
-          gap: '6rem'
-        }}
+        style={
+          isMobile ? {
+            position: "relative",
+            display: 'flex',
+            flexFlow: 'column',
+            gap: '1rem'
+          } : {
+            position: "relative",
+            display: 'flex',
+            flexFlow: 'column',
+            gap: '6rem'
+          }
+        }
       >
         <ListBind
           bindTitle="页面3方案列表"
           bindCode="page3_plan_list__list"
-          data={globalDataBindData}
+          data={parameterBindData}
         />
         {
-          JSON.parse(getValue(globalDataBindData, 'page3_plan_list__list') || '[]')?.map((item, index) => {
+          JSON.parse(getValue(parameterBindData, 'page3_plan_list__list') || '[]')?.map((item, index) => {
             let { code, value } = item;
             return (
               <>
@@ -104,7 +135,7 @@ const Page3 = (props) => {
                   key={code}
                   code={code}
                   title={value}
-                  direction={index % 2 === 0 ? 'right' : 'left'}
+                  direction={isMobile ? 'left' : (index % 2 === 0 ? 'right' : 'left')}
                 />
               </>
             )

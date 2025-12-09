@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { UnorderedListOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from 'react-redux';
 
 
 //接口
@@ -16,7 +17,7 @@ import FooterPage from '../FooterPage/FooterPage';
 
 //方法
 import { resultTip } from '@/utils/lyTool';
-import { throttle } from '@/utils/Tool';
+import { checkAndSetDevice, throttle } from '@/utils/Tool';
 
 //样式
 import './ArticlePage.css';
@@ -30,6 +31,7 @@ const ArticlePage = (props) => {
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
   const { code } = useParams();
+  const isMobile = useSelector(state => state.globalData.isMobile);
 
   //useState
   const [isValidUuid, setIsValidUuid] = useState(false);
@@ -45,6 +47,7 @@ const ArticlePage = (props) => {
   useEffect(() => {
     if (code) {
       // setIsValidUuid(isValidUUID4(code));
+      checkAndSetDevice();
       loadArticle(code);
     }
 
@@ -144,7 +147,7 @@ const ArticlePage = (props) => {
       setArticleData(dataInfo);
       // 当文章不存在时，跳转到404页面
       console.log(dataInfo);
-      if(!dataInfo?.id){
+      if (!dataInfo?.id) {
         window.location.href = '/404';
       }
     } else {
@@ -163,7 +166,7 @@ const ArticlePage = (props) => {
   return (
     <>
       <HeaderBar />
-      <div className={`ArticlePage darkMode`}>
+      <div className={`${isMobile ? 'MobileArticlePage' : 'ArticlePage'} darkMode`}>
         <PageLoading loading={pageLoading} />
 
         {/* 背景图 */}
@@ -185,11 +188,11 @@ const ArticlePage = (props) => {
         /> */}
 
         {/* 文章 */}
-        <div className='articlePageContent'>
-          <div className='articlePageTitle' id={'articleTitle'}>
+        <div className={isMobile ? 'MobileArticlePageContent' : 'ArticlePageContent'}>
+          <div className={isMobile ? 'MobileArticlePageTitle' : 'ArticlePageTitle'} id={'ArticleTitle'}>
             {articleData.mainTitle}
           </div>
-          <div className='articlePageTime'>
+          <div className={isMobile ? 'MobileArticlePageTime' : 'ArticlePageTime'}>
             于<span style={{ margin: '0 0.2rem' }}>{dayjs(articleData.createTime).format('YYYY-MM-DD HH:mm:ss')}</span>发布
           </div>
           <Divider style={{ margin: '12px 0' }} />
@@ -198,31 +201,35 @@ const ArticlePage = (props) => {
             dangerouslySetInnerHTML={{ __html: articleContent }}
           />
         </div>
-        {/* 右侧目录 */}
-        <div className='articlePageCatalogue'>
-          <div className='catalogueTitle'>
-            <UnorderedListOutlined style={{ marginRight: '1rem' }} />
-            目录
-          </div>
-
-          <div className='catalogueList'>
-            {catalogueItems.map((item) => (
-              <div
-                key={item.id}
-                className={`catalogueItem catalogueLevel${item.level} ${activeCatalogueId === item.id ? 'catalogueItemActive' : ''}`}
-                onClick={() => {
-                  const element = document.getElementById(item.id);
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                style={{ paddingLeft: `${(item.level) * 16}px` }}
-              >
-                {item.text}
+        {/* 右侧目录(PC端显示) */}
+        {
+          (!isMobile) ? (
+            <div className={isMobile ? 'MobileArticlePageCatalogue' : 'ArticlePageCatalogue'}>
+              <div className={isMobile ? 'MobileCatalogueTitle' : 'CatalogueTitle'}>
+                <UnorderedListOutlined style={{ marginRight: '1rem' }} />
+                目录
               </div>
-            ))}
-          </div>
-        </div>
+
+              <div className={isMobile ? 'MobileCatalogueList' : 'CatalogueList'}>
+                {catalogueItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`CatalogueItem CatalogueLevel${item.level} ${activeCatalogueId === item.id ? 'CatalogueItemActive' : ''}`}
+                    onClick={() => {
+                      const element = document.getElementById(item.id);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    style={{ paddingLeft: `${(item.level) * 16}px` }}
+                  >
+                    {item.text}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null
+        }
       </div>
       <div style={{ zIndex: 999 }}>
         <FooterPage />

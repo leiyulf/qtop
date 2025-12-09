@@ -28,7 +28,8 @@ const Page2 = (props) => {
   //组件初始化
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
-  const globalDataBindData = useSelector(state => state.globalDataBind.data);
+  const parameterBindData = useSelector(state => state.parameterBind.data);
+  const isMobile = useSelector(state => state.globalData.isMobile);
 
   //useState
   const [scrollContainerRef, setScrollContainerRef] = useState(null);
@@ -46,7 +47,7 @@ const Page2 = (props) => {
       if (scrollContainerRef) {
         const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef;
         const maxScrollLeft = scrollWidth - clientWidth;
-        
+
         // 判断是否需要改变方向
         if (scrollLeft >= (maxScrollLeft - 10)) {
           direction = -1; // 到达最右侧，开始向左滚动
@@ -134,7 +135,13 @@ const Page2 = (props) => {
   }, [scrollContainerRef]);
 
   return (
-    <div className="Page2" style={{ padding: '12rem 0' }}>
+    <div id='Page2' className="Page2" style={
+      isMobile ? {
+        padding: '6rem 2rem'
+      } : {
+        padding: '12rem 0'
+      }
+    }>
       {/* 文本 */}
       <div
         style={{
@@ -147,35 +154,52 @@ const Page2 = (props) => {
         }}
       >
         <div
-          style={{
-            position: "relative",
-            fontSize: "3rem",
-            fontWeight: "bold",
-            letterSpacing: "0.2rem",
-            color: "white"
-          }}
+          style={
+            isMobile ? {
+              position: "relative",
+              fontSize: "2rem",
+              fontWeight: "bold",
+              letterSpacing: "0.2rem",
+              color: "white",
+              textAlign: "center"
+            } : {
+              position: "relative",
+              fontSize: "3rem",
+              fontWeight: "bold",
+              letterSpacing: "0.2rem",
+              color: "white"
+            }
+          }
         >
           <TextBind
-            data={globalDataBindData}
+            data={parameterBindData}
             bindTitle="页面2主标题"
             bindCode="page2_main_title__text"
           />
-          {getValue(globalDataBindData, 'page2_main_title__text') || '数字化时代的质量管理挑战'}
+          {getValue(parameterBindData, 'page2_main_title__text') || '数字化时代的质量管理挑战'}
         </div>
         <div
-          style={{
-            position: "relative",
-            fontSize: "1.2rem",
-            letterSpacing: "0.1rem",
-            color: "#A6AAB5"
-          }}
+          style={
+            isMobile ? {
+              position: "relative",
+              fontSize: "1.2rem",
+              letterSpacing: "0.1rem",
+              color: "#A6AAB5",
+              textAlign: "center"
+            } : {
+              position: "relative",
+              fontSize: "1.2rem",
+              letterSpacing: "0.1rem",
+              color: "#A6AAB5"
+            }
+          }
         >
           <TextBind
-            data={globalDataBindData}
+            data={parameterBindData}
             bindTitle="页面2副标题"
             bindCode="page2_sub_title__text"
           />
-          {getValue(globalDataBindData, 'page2_sub_title__text') || '顺应趋势，与时俱进，质量管理信息化势在必行'}
+          {getValue(parameterBindData, 'page2_sub_title__text') || '顺应趋势，与时俱进，质量管理信息化势在必行'}
         </div>
       </div>
       {/* 按钮组 */}
@@ -191,21 +215,21 @@ const Page2 = (props) => {
         <ListBind
           bindTitle="页面2按钮列表"
           bindCode="page2_button_list__list"
-          data={globalDataBindData}
+          data={parameterBindData}
         />
         {
-          JSON.parse(getValue(globalDataBindData, 'page2_button_list__list') || '[]')?.map((item, index) => {
+          JSON.parse(getValue(parameterBindData, 'page2_button_list__list') || '[]')?.map((item, index) => {
             let { code, value } = item;
             return (
               <ColorButton
                 title={value}
               >
                 <TextBind
-                  data={globalDataBindData}
+                  data={parameterBindData}
                   bindTitle="按钮文本"
                   bindCode={`button_content_${code}__text`}
                 />
-                {getValue(globalDataBindData, `button_content_${code}__text`) || '按钮1'}
+                {getValue(parameterBindData, `button_content_${code}__text`) || '按钮1'}
               </ColorButton>
             )
           })
@@ -214,67 +238,91 @@ const Page2 = (props) => {
       <RowDivider />
       {/* 卡片 */}
       <div
-        style={{
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          margin: '0 4rem 0rem 4rem',
-          padding: '4rem 0',
-        }}
-      >
-        <div
-          style={{
+        style={
+          isMobile ? {
             position: 'relative',
-            flexDirection: 'column',
+            display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            width: '24rem',
-            height: '100%',
-            padding: '0 2rem',
-            color: 'white',
-            fontSize: '3rem',
-            fontWeight: 'bold',
-            overflowWrap: 'break-word', // 长单词换行
-            boxSizing: 'border-box',
-          }}
-        >
-          <TextBind
-            data={globalDataBindData}
-            bindTitle="页面2列表左侧文本"
-            bindCode="page2_list_left__text"
-            style={{
-              left: '-1rem'
-            }}
-          />
-          {getValue(globalDataBindData, 'page2_list_left__text') || '左侧文本'}
-
-        </div>
+            margin: '2rem 0 0 0',
+            padding: '0',
+          } : {
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            margin: '0 4rem 0rem 4rem',
+            padding: '4rem 0',
+          }
+        }
+      >
+        {/* 左侧文本(PC端显示) */}
+        {
+          (!isMobile) ? (
+            <div
+              style={{
+                position: 'relative',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '24rem',
+                height: '100%',
+                padding: '0 2rem',
+                color: 'white',
+                fontSize: '3rem',
+                fontWeight: 'bold',
+                overflowWrap: 'break-word', // 长单词换行
+                boxSizing: 'border-box',
+              }}
+            >
+              <TextBind
+                data={parameterBindData}
+                bindTitle="页面2列表左侧文本"
+                bindCode="page2_list_left__text"
+                style={{
+                  left: '-1rem'
+                }}
+              />
+              {getValue(parameterBindData, 'page2_list_left__text') || '左侧文本'}
+            </div>
+          ) : null
+        }
         <ListBind
           bindTitle="页面2卡片列表"
           bindCode="page2_card_list__list"
-          data={globalDataBindData}
+          data={parameterBindData}
           style={{
             top: '-1rem',
             left: '50%',
           }}
         />
         <div
-          style={{
-            position: 'relative',
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'nowrap',
-            gap: '2rem',
-            width: 'calc(100% - 24rem)',
-            height: '100%',
-            padding: '0 2rem',
-            overflowX: 'auto'
-          }}
+          style={
+            isMobile ? {
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'nowrap',
+              gap: '2rem',
+              width: '100%',
+              height: '100%',
+              padding: '0',
+              overflowX: 'auto'
+            } : {
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'nowrap',
+              gap: '2rem',
+              width: 'calc(100% - 24rem)',
+              height: '100%',
+              padding: '0 2rem',
+              overflowX: 'auto'
+            }
+          }
           ref={setScrollContainerRef}
           onWheel={handleWheel}
         >
           {
-            JSON.parse(getValue(globalDataBindData, 'page2_card_list__list') || '[]')?.map((item, index) => {
+            JSON.parse(getValue(parameterBindData, 'page2_card_list__list') || '[]')?.map((item, index) => {
               let { code, value } = item;
               return (
                 <CardItem

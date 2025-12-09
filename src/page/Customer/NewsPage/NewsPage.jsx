@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Tag, Pagination, Image } from 'antd';
 import moment from 'moment';
 import { UnorderedListOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
 // 组件
 import FooterPage from '../FooterPage/FooterPage';
@@ -13,6 +14,7 @@ import { getAllArticle } from '@/service/ArticleManagement';
 
 //方法
 import { resultTip } from '@/utils/lyTool';
+import { checkAndSetDevice } from '@/utils/Tool';
 
 // 样式
 import "./NewsPage.css";
@@ -20,6 +22,7 @@ import "./NewsPage.css";
 // 新闻页面组件
 const NewsPage = (props) => {
   let { } = props;
+  const isMobile = useSelector(state => state.globalData.isMobile);
 
   //useState
   const [tableLoading, setTableLoading] = useState(false); //表格加载状态
@@ -31,6 +34,7 @@ const NewsPage = (props) => {
 
   //useEffect
   useEffect(() => {
+    checkAndSetDevice();
     refreshDataList();
   }, []);
 
@@ -111,30 +115,30 @@ const NewsPage = (props) => {
 
   return (
     <>
-      <div className='NewsPage'>
+      <div className={isMobile ? 'MobileNewsPage' : 'NewsPage'}>
         <HeaderBar light={"新闻资讯"} />
-        <div className='NewsListBox'>
-          <div className="NewsListContainer">
-            <div className="NewsPageTitle">
+        <div className={isMobile ? 'MobileNewsListBox' : 'NewsListBox'}>
+          <div className={isMobile ? 'MobileNewsListContainer' : 'NewsListContainer'}>
+            <div className={isMobile ? 'MobileNewsPageTitle' : 'NewsPageTitle'}>
               <UnorderedListOutlined style={{ color: '#84e2d8', marginRight: '1rem' }} />
               新闻资讯
             </div>
-            <div className="NewsList">
+            <div className={isMobile ? 'MobileNewsList' : 'NewsList'}>
               {paginatedData?.map((news) => (
                 <div
                   key={news.id}
-                  className="NewsItem"
+                  className={isMobile ? 'MobileNewsItem' : 'NewsItem'}
                   onClick={() => {
                     window.open(`/article/${news.id}`);
                   }}
                 >
-                  <div className="NewsItemWithCover">
+                  <div className={isMobile ? 'MobileNewsItemWithCover' : 'NewsItemWithCover'}>
                     {news.articleCover ? (
-                      <div className="NewsItemCoverBox">
+                      <div className={isMobile ? 'MobileNewsItemCoverBox' : 'NewsItemCoverBox'}>
                         <Image
                           src={news.articleCover}
                           alt="封面"
-                          className="NewsItemCover"
+                          className={isMobile ? 'MobileNewsItemCover' : 'NewsItemCover'}
                           onError={(e) => {
                             e.target.style.display = 'none';
                           }}
@@ -145,19 +149,19 @@ const NewsPage = (props) => {
                       </div>
                     ) : null
                     }
-                    <div className="NewsItemContent">
-                      <div className="NewsItemHeader">
+                    <div className={isMobile ? 'MobileNewsItemContent' : 'NewsItemContent'}>
+                      <div className={isMobile ? 'MobileNewsItemHeader' : 'NewsItemHeader'}>
                         <div style={{ flex: '1' }} />
-                        <span className="NewsItemDate">{moment(news?.createTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+                        <span className={isMobile ? 'MobileNewsItemDate' : 'NewsItemDate'}>{moment(news?.createTime).format('YYYY-MM-DD HH:mm:ss')}</span>
                       </div>
-                      <div className="NewsItemTitle">{news?.mainTitle ?? '无标题'}</div>
-                      <div className="NewsItemSummary">
+                      <div className={isMobile ? 'MobileNewsItemTitle' : 'NewsItemTitle'}>{news?.mainTitle ?? '无标题'}</div>
+                      <div className={isMobile ? 'MobileNewsItemSummary' : 'NewsItemSummary'}>
                         {extractTextFromHtml(news?.articleContent) ?? '无内容'}
                       </div>
-                      <div className="NewsItemFooter">
-                        <span className="NewsItemAuthor">作者: {news?.author}</span>
-                        <div className="NewsItemTags">
-                          <Tag className="NewsItemTag" color="default">{(news?.articleGroup) ?? '无标签'}</Tag>
+                      <div className={isMobile ? 'MobileNewsItemFooter' : 'NewsItemFooter'}>
+                        <span className={isMobile ? 'MobileNewsItemAuthor' : 'NewsItemAuthor'}>作者: {news?.author}</span>
+                        <div className={isMobile ? 'MobileNewsItemTags' : 'NewsItemTags'}>
+                          <Tag className={isMobile ? 'MobileNewsItemTag' : 'NewsItemTag'} color="default">{(news?.articleGroup) ?? '无标签'}</Tag>
                         </div>
                       </div>
                     </div>
@@ -166,7 +170,7 @@ const NewsPage = (props) => {
               ))}
             </div>
             {/* 添加分页组件 */}
-            <div className="NewsPagination">
+            <div className={isMobile ? 'MobileNewsPagination' : 'NewsPagination'}>
               <Pagination
                 style={{
                   background: 'transparent',

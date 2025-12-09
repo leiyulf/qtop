@@ -10,7 +10,7 @@ import { getAllArticle } from '@/service/ArticleManagement.js';
 
 //组件
 import PageLoading from '../PageLoading/PageLoading';
-import { updateGlobalDataBindDataMap } from '@/reducer/globalDataBindSlice.js';
+import { updateParameterBindDataMap } from '@/reducer/parameterBindSlice.js';
 
 //方法
 import { getValue, getId } from '@/utils/Tool';
@@ -140,7 +140,7 @@ const ArticleBind = (props) => {
       let getResult = await getBindValueByCode({ bindCode });
       if (getResult?.success == true) {
         let data = getResult.data || {};
-        dispatch(updateGlobalDataBindDataMap({ [bindCode]: data }));
+        dispatch(updateParameterBindDataMap({ [bindCode]: data }));
       }
     } else {
       message.error('执行失败');

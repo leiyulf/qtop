@@ -12,7 +12,7 @@ import { createBind, updateBind, getBindValueByCode } from '@/service/MainBindPa
 //方法
 import { useDispatch, useSelector } from 'react-redux';
 import { getValue, getId } from '@/utils/Tool';
-import { updateGlobalDataBindDataMap } from '@/reducer/globalDataBindSlice.js';
+import { updateParameterBindDataMap } from '@/reducer/parameterBindSlice.js';
 
 //样式
 
@@ -64,7 +64,7 @@ const ListBind = (props) => {
       let getResult = await getBindValueByCode({ bindCode });
       if (getResult?.success == true) {
         let data = getResult.data || {};
-        dispatch(updateGlobalDataBindDataMap({ [bindCode]: data }));
+        dispatch(updateParameterBindDataMap({ [bindCode]: data }));
       }
     } else {
       message.error('执行失败');

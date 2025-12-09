@@ -1,10 +1,12 @@
 // reducer/store.js
 import { configureStore } from '@reduxjs/toolkit'
-import globalDataBindReducer from './globalDataBindSlice'
+import parameterBindReducer from './parameterBindSlice';
+import globalDataReducer from './globalData';
 
 export const store = configureStore({
   reducer: {
-    globalDataBind: globalDataBindReducer,
+    parameterBind: parameterBindReducer,
+    globalData: globalDataReducer
   },
 })
 

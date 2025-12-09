@@ -8,7 +8,7 @@ import { createBind, updateBind, getBindValueByCode } from '@/service/MainBindPa
 // 方法
 import { useDispatch } from 'react-redux';
 import { getValue, getId } from '@/utils/Tool';
-import { updateGlobalDataBindDataMap } from '@/reducer/globalDataBindSlice.js';
+import { updateParameterBindDataMap } from '@/reducer/parameterBindSlice.js';
 
 const ImageBind = (props) => {
   let {
@@ -160,7 +160,7 @@ const ImageBind = (props) => {
       let getResult = await getBindValueByCode({ bindCode });
       if (getResult?.success == true) {
         let data = getResult.data || {};
-        dispatch(updateGlobalDataBindDataMap({ [bindCode]: data }));
+        dispatch(updateParameterBindDataMap({ [bindCode]: data }));
       }
     } else {
       message.error('保存失败');

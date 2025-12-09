@@ -33,14 +33,14 @@ const CardItem = (props) => {
   //组件初始化
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
-  const globalDataBindData = useSelector(state => state.globalDataBind.data);
+  const parameterBindData = useSelector(state => state.parameterBind.data);
+  const isMobile = useSelector(state => state.globalData.isMobile);
 
   //useState
 
   //useEffect
   //modal初始化
   useEffect(() => {
-    console.log("CardItem");
   }, []);
 
   //func
@@ -48,9 +48,16 @@ const CardItem = (props) => {
   return (
     <div
       className="CardItem"
+      style={
+        isMobile ? {
+          width: '16rem'
+        } : {
+          width: '20rem'
+        }
+      }
       onClick={(e) => {
         e.stopPropagation();
-        let articleCode = getValue(globalDataBindData, `card_content_${code}__article`);
+        let articleCode = getValue(parameterBindData, `card_content_${code}__article`);
         if (articleCode) {
           window.open(`/article/${articleCode}`);
         }
@@ -58,17 +65,22 @@ const CardItem = (props) => {
     >
       <TitleTag value={title} />
       <div
-        style={{
-          position: "relative",
-          width: "20rem",
-        }}
+        style={
+          isMobile ? {
+            position: "relative",
+            width: "16rem",
+          } : {
+            position: "relative",
+            width: "20rem",
+          }
+        }
       >
         {/* 序号 */}
         <div
           style={{
             position: "relative",
-            fontSize:'0.9rem',
-            color:'#b2f1e8',
+            fontSize: '0.9rem',
+            color: '#b2f1e8',
             letterSpacing: '4px',
             fontWeight: 'bold',
           }}
@@ -88,7 +100,7 @@ const CardItem = (props) => {
           }}
         >
           <TextBind
-            data={globalDataBindData}
+            data={parameterBindData}
             bindTitle="卡片主标题"
             bindCode={`card_title__${code}_text`}
             style={{
@@ -101,37 +113,48 @@ const CardItem = (props) => {
               fontSize: '0.75rem'
             }}
           />
-          {getValue(globalDataBindData, `card_title__${code}_text`) || '标题内容'}
+          {getValue(parameterBindData, `card_title__${code}_text`) || '标题内容'}
         </div>
         {/* 图片 */}
         <div
-          style={{
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "20rem",
-            height: "18rem",
-            borderRadius: "3px",
-            overflow: "hidden"
-          }}
+          style={
+            isMobile ? {
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "16rem",
+              height: "13rem",
+              borderRadius: "3px",
+              overflow: "hidden"
+            } : {
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "20rem",
+              height: "18rem",
+              borderRadius: "3px",
+              overflow: "hidden"
+            }
+          }
         >
           <ImageBind
             bindCode={`card_background_${code}__image`}
             bindTitle="卡片背景图片"
-            data={globalDataBindData}
+            data={parameterBindData}
             style={{ right: '1rem', top: '0.5rem' }}
           />
           <ArticleBind
             bindCode={`card_content_${code}__article`}
             bindTitle="跳转文章"
-            data={globalDataBindData}
+            data={parameterBindData}
             style={{ right: '1rem', top: '4rem' }}
           />
           <div
             className='CardItemImage'
             style={{
-              backgroundImage: `url(${getValue(globalDataBindData, `card_background_${code}__image`) || '/image/background.jpg'})`,
+              backgroundImage: `url(${getValue(parameterBindData, `card_background_${code}__image`) || '/image/background.jpg'})`,
             }}
           />
         </div>
@@ -149,7 +172,7 @@ const CardItem = (props) => {
           }}
         >
           <TextBind
-            data={globalDataBindData}
+            data={parameterBindData}
             bindTitle="卡片副标题"
             bindCode={`card_sub_title__${code}_text`}
             style={{
@@ -162,7 +185,7 @@ const CardItem = (props) => {
               fontSize: '0.75rem'
             }}
           />
-          {getValue(globalDataBindData, `card_sub_title__${code}_text`) || '详细内容详细内容详细内容详细内容'}
+          {getValue(parameterBindData, `card_sub_title__${code}_text`) || '详细内容详细内容详细内容详细内容'}
         </div>
       </div>
     </div>

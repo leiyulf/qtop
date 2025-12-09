@@ -32,20 +32,20 @@ const ArticleItem = (props) => {
   //组件初始化
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
-  const globalDataBindData = useSelector(state => state.globalDataBind.data);
+  const parameterBindData = useSelector(state => state.parameterBind.data);
+  const isMobile = useSelector(state => state.globalData.isMobile);
 
   //useState
 
   //useEffect
   //modal初始化
   useEffect(() => {
-    console.log("CardItem");
   }, []);
 
   //func
 
   return (
-    <div className="ArticleItem">
+    <div className={isMobile ? 'MobileArticleItem' : 'ArticleItem'}>
       <TitleTag value={title} />
       {
         direction === 'right' && (
@@ -56,64 +56,88 @@ const ArticleItem = (props) => {
             }}
           >
             <TextBind
-              data={globalDataBindData}
+              data={parameterBindData}
               bindTitle="方案内容"
               bindCode={`plan_content__${code}_text`}
             />
-            {getValue(globalDataBindData, `plan_content__${code}_text`) || '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'}
+            {getValue(parameterBindData, `plan_content__${code}_text`) || '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'}
           </div>
         )
       }
       <div className='titleBox'>
         <div
-          style={{
-            position: "relative",
-            fontSize: '1.3rem',
-            fontWeight: 'bold',
-            color: 'white',
-            letterSpacing: '0.1rem'
-          }}>
+          style={
+            isMobile ? {
+              position: "relative",
+              fontSize: '1.2rem',
+              fontWeight: 'bold',
+              color: 'white',
+              letterSpacing: '0.1rem'
+            } : {
+              position: "relative",
+              fontSize: '1.3rem',
+              fontWeight: 'bold',
+              color: 'white',
+              letterSpacing: '0.1rem'
+            }
+          }>
           <TextBind
-            data={globalDataBindData}
+            data={parameterBindData}
             bindTitle="方案主标题"
             bindCode={`plan_title__${code}_text`}
           />
-          {getValue(globalDataBindData, `plan_title__${code}_text`) || '标题标题标题'}
+          {getValue(parameterBindData, `plan_title__${code}_text`) || '标题标题标题'}
         </div>
         <div
-          style={{
-            position: "relative",
-            fontSize: '1.1rem',
-            fontWeight: '500',
-            color: 'rgb(166, 170, 181)',
-            letterSpacing: '0.1rem'
-          }}>
+          style={
+            isMobile ? {
+              position: "relative",
+              fontSize: '1rem',
+              fontWeight: '500',
+              color: 'rgb(166, 170, 181)',
+              letterSpacing: '0.1rem'
+            } : {
+              position: "relative",
+              fontSize: '1.1rem',
+              fontWeight: '500',
+              color: 'rgb(166, 170, 181)',
+              letterSpacing: '0.1rem'
+            }
+          }>
           <TextBind
-            data={globalDataBindData}
+            data={parameterBindData}
             bindTitle="方案副标题"
             bindCode={`plan_sub_title__${code}_text`}
           />
-          {getValue(globalDataBindData, `plan_sub_title__${code}_text`) || '副标题副标题副标题副标题'}
+          {getValue(parameterBindData, `plan_sub_title__${code}_text`) || '副标题副标题副标题副标题'}
         </div>
         <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "20rem",
-            borderRadius: "4px",
-            overflow: "hidden",
-          }}
+          style={
+            isMobile ? {
+              position: "relative",
+              width: "100%",
+              height: "14rem",
+              borderRadius: "4px",
+              overflow: "hidden",
+            } : {
+              position: "relative",
+              width: "100%",
+              height: "20rem",
+              borderRadius: "4px",
+              overflow: "hidden",
+            }
+          }
         >
           <ImageBind
             bindCode={`plan_background_${code}__image`}
             bindTitle="方案背景图片"
-            data={globalDataBindData}
+            data={parameterBindData}
             style={{ right: '1rem', top: '1rem' }}
           />
           <div
             className='imageBox'
             style={{
-              backgroundImage: `url(${getValue(globalDataBindData, `plan_background_${code}__image`) || '/image/background.jpg'})`,
+              backgroundImage: `url(${getValue(parameterBindData, `plan_background_${code}__image`) || '/image/background.jpg'})`,
             }}
           />
         </div>
@@ -127,11 +151,11 @@ const ArticleItem = (props) => {
             }}
           >
             <TextBind
-              data={globalDataBindData}
+              data={parameterBindData}
               bindTitle="方案内容"
               bindCode={`plan_content__${code}_text`}
             />
-            {getValue(globalDataBindData, `plan_content__${code}_text`) || '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'}
+            {getValue(parameterBindData, `plan_content__${code}_text`) || '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'}
           </div>
         )
       }

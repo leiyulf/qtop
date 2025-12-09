@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Input, Form, message, Tabs, DatePicker, InputNumber, Table, Popconfirm, Select, Tag, Divider } from 'antd';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
 
 //接口
 import { getAllBindValue } from '@/service/MainBindPage';
 
 //组件
-import Page1 from './Page1/Page1';
+import HomePage from './HomePage/HomePage';
 import Page2 from './Page2/Page2';
 import Page3 from './Page3/Page3';
 import Page4 from './Page4/Page4';
@@ -17,8 +18,8 @@ import BackToTop from '@/component/Global/BackToTop/BackToTop'; // 引入新组�
 import HeaderBar from '@/component/Customer/HeaderBar/HeaderBar';
 
 //方法
-import { useDispatch, useSelector } from 'react-redux';
-import { setGlobalDataBindDataMap } from '@/reducer/globalDataBindSlice.js';
+import { setParameterBindDataMap } from '@/reducer/parameterBindSlice.js';
+import { checkAndSetDevice } from '@/utils/Tool';
 
 //样式
 
@@ -28,13 +29,13 @@ const Home = (props) => {
   let {
     rule = 'customer'
   } = props;
-  console.log(rule);
 
   //组件初始化
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
   const dispatch = useDispatch();
-  const dataMap = useSelector(state => state.globalDataBind.data);
+  const dataMap = useSelector(state => state.parameterBind.data);
+  const isMobile = useSelector(state => state.globalData.isMobile);
 
   //useState
   const [loading, setLoading] = useState(false);
@@ -42,10 +43,15 @@ const Home = (props) => {
   //useEffect
   //modal初始化
   useEffect(() => {
+    loadEnv();
     refreshDataList();
   }, []);
 
   //func
+  async function loadEnv(){
+    checkAndSetDevice();
+  }
+
   async function refreshDataList() {
     setLoading(true);
     let getResult = await getAllBindValue({});
@@ -53,10 +59,9 @@ const Home = (props) => {
       let dataList = getResult.data || [];
       let dataMap = {};
       Array.from(dataList).forEach(item => {
-        console.log(item);
         dataMap[item.bindCode] = item;
       });
-      dispatch(setGlobalDataBindDataMap(dataMap));
+      dispatch(setParameterBindDataMap(dataMap));
     }
     setLoading(false);
   }
@@ -65,7 +70,7 @@ const Home = (props) => {
     <div className={`Customer ${rule == 'admin' ? 'adminMode' : 'customerMode'}`} style={{ overflowX: 'hidden' }}>
       <PageLoading loading={loading} />
       <HeaderBar light={'首页'} fixed={rule == 'customer' ? true : false} />
-      <Page1 rule={rule} />
+      <HomePage rule={rule} />
       <Page2 rule={rule} />
       <Page3 rule={rule} />
       <Page4 rule={rule} />

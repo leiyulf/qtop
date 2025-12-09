@@ -32,20 +32,20 @@ const PriceCard = (props) => {
   //组件初始化
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
-  const globalDataBindData = useSelector(state => state.globalDataBind.data);
+  const parameterBindData = useSelector(state => state.parameterBind.data);
+  const isMobile = useSelector(state => state.globalData.isMobile);
 
   //useState
 
   //useEffect
   //modal初始化
   useEffect(() => {
-    console.log("PriceCard");
   }, []);
 
   //func
 
   return (
-    <div className="PriceCard">
+    <div className={isMobile ? 'MobilePriceCard' : 'PriceCard'}>
       <TitleTag value={title} />
       <div className='Card'>
         <div
@@ -59,7 +59,7 @@ const PriceCard = (props) => {
             marginBottom: '1rem',
           }}>
           <TextBind
-            data={globalDataBindData}
+            data={parameterBindData}
             bindTitle="价格卡片主标题"
             bindCode={`price_title__${code}_text`}
             style={{
@@ -72,7 +72,7 @@ const PriceCard = (props) => {
               fontSize: '0.75rem'
             }}
           />
-          {getValue(globalDataBindData, `price_title__${code}_text`) || '产品1'}
+          {getValue(parameterBindData, `price_title__${code}_text`) || '产品1'}
         </div>
         <div
           style={{
@@ -86,7 +86,7 @@ const PriceCard = (props) => {
           }}
         >
           <TextBind
-            data={globalDataBindData}
+            data={parameterBindData}
             bindTitle="价格卡片描述"
             bindCode={`price_description__${code}_text`}
             style={{
@@ -99,7 +99,7 @@ const PriceCard = (props) => {
               fontSize: '0.75rem'
             }}
           />
-          {getValue(globalDataBindData, `price_description__${code}_text`) || '描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描'}
+          {getValue(parameterBindData, `price_description__${code}_text`) || '描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描描述描述描述描述描述描述描述描'}
         </div>
         <div
           style={{
@@ -114,7 +114,7 @@ const PriceCard = (props) => {
         >
           <span style={{ fontSize: '1.7rem' }}>￥</span>
           <TextBind
-            data={globalDataBindData}
+            data={parameterBindData}
             bindTitle="价格卡片金额"
             bindCode={`price_amount__${code}_text`}
             style={{
@@ -127,7 +127,7 @@ const PriceCard = (props) => {
               fontSize: '0.75rem'
             }}
           />
-          {getValue(globalDataBindData, `price_amount__${code}_text`) || '100000'}
+          {getValue(parameterBindData, `price_amount__${code}_text`) || '100000'}
         </div>
         <div
           style={{
@@ -137,7 +137,7 @@ const PriceCard = (props) => {
           className='normalButton hollowOut'
           onClick={(e) => {
             e.stopPropagation();
-            let articleCode = getValue(globalDataBindData, `price_button_${code}__article`);
+            let articleCode = getValue(parameterBindData, `price_button_${code}__article`);
             if (articleCode) {
               window.open(`/article/${articleCode}`);
             }
@@ -147,7 +147,7 @@ const PriceCard = (props) => {
           <ArticleBind
             bindCode={`price_button_${code}__article`}
             bindTitle="跳转文章"
-            data={globalDataBindData}
+            data={parameterBindData}
             style={{ right: '-1rem', top: '-1rem' }}
           />
         </div>
@@ -156,7 +156,7 @@ const PriceCard = (props) => {
         <ListBind
           bindTitle="价格卡片小列表"
           bindCode={`price_small_list_${code}__list`}
-          data={globalDataBindData}
+          data={parameterBindData}
           style={{
             position: "absolute",
             top: '-0.5rem',
@@ -168,7 +168,7 @@ const PriceCard = (props) => {
           }}
         />
         {
-          JSON.parse(getValue(globalDataBindData, `price_small_list_${code}__list`) || '[]')?.map((item, index) => {
+          JSON.parse(getValue(parameterBindData, `price_small_list_${code}__list`) || '[]')?.map((item, index) => {
             let { value } = item;
             let innerCode = item['code'];
             return (
@@ -192,7 +192,7 @@ const PriceCard = (props) => {
                   }}
                 >
                   <TextBind
-                    data={globalDataBindData}
+                    data={parameterBindData}
                     bindTitle="价格卡片小列表内容"
                     bindCode={`price_small_list_text_${code}_${innerCode}__text`}
                     style={{
@@ -205,7 +205,7 @@ const PriceCard = (props) => {
                       fontSize: '0.75rem'
                     }}
                   />
-                  {getValue(globalDataBindData, `price_small_list_text_${code}_${innerCode}__text`) || '详情详情详情详情详情详情详情'}
+                  {getValue(parameterBindData, `price_small_list_text_${code}_${innerCode}__text`) || '详情详情详情详情详情详情详情'}
 
                 </div>
               </div>

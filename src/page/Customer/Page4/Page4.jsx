@@ -27,76 +27,112 @@ const Page4 = (props) => {
   //组件初始化
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
-  const globalDataBindData = useSelector(state => state.globalDataBind.data);
+  const parameterBindData = useSelector(state => state.parameterBind.data);
+  const isMobile = useSelector(state => state.globalData.isMobile);
 
   //useState
 
   //useEffect
   //modal初始化
   useEffect(() => {
-    console.log("Home");
   }, []);
 
   //func
 
   return (
-    <div className="Page4" style={{ padding: '8rem 16rem 6rem 16rem' }}>
+    <div className="Page4" style={
+      isMobile ? {
+        padding: '6rem 2rem'
+      } : {
+        padding: '8rem 16rem 6rem 16rem'
+      }
+    }>
       <div
-        style={{
-          position: "relative",
-          display: 'flex',
-          justifyContent: 'center',
-          color: 'white',
-          marginBottom: '2rem',
-          letterSpacing: '1px',
-          fontSize: '2rem',
-          fontWeight: 'bold',
-        }}
+        style={
+          isMobile ? {
+            position: "relative",
+            display: 'flex',
+            justifyContent: 'center',
+            color: 'white',
+            marginBottom: '1rem',
+            letterSpacing: '0.1rem',
+            fontSize: '2rem',
+            fontWeight: 'bold',
+            textAlign: 'center'
+          } : {
+            position: "relative",
+            display: 'flex',
+            justifyContent: 'center',
+            color: 'white',
+            marginBottom: '2rem',
+            letterSpacing: '0.1rem',
+            fontSize: '2rem',
+            fontWeight: 'bold',
+          }
+        }
       >
-
         <TextBind
-          data={globalDataBindData}
+          data={parameterBindData}
           bindTitle="页面4主标题"
           bindCode="page4_main_title__text"
         />
-        {getValue(globalDataBindData, 'page4_main_title__text') || '标题标题标题标题标题标题标题标题'}
+        {getValue(parameterBindData, 'page4_main_title__text') || '标题标题标题标题标题标题标题标题'}
       </div>
       <div
-        style={{
-          position: "relative",
-          display: 'flex',
-          justifyContent: 'center',
-          color: 'rgb(166, 170, 181)',
-          marginBottom: '4rem',
-          letterSpacing: '2px',
-          fontSize: '0.9rem',
-        }}
+        style={
+          isMobile ? {
+            position: "relative",
+            display: 'flex',
+            justifyContent: 'center',
+            color: 'rgb(166, 170, 181)',
+            marginBottom: '2rem',
+            letterSpacing: '2px',
+            fontSize: '0.9rem',
+          } : {
+            position: "relative",
+            display: 'flex',
+            justifyContent: 'center',
+            color: 'rgb(166, 170, 181)',
+            marginBottom: '4rem',
+            letterSpacing: '2px',
+            fontSize: '0.9rem',
+          }
+        }
       >
         <TextBind
-          data={globalDataBindData}
+          data={parameterBindData}
           bindTitle="页面4描述"
           bindCode="page4_desc__text"
         />
-        {getValue(globalDataBindData, 'page4_desc__text') || '描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述'}
+        {getValue(parameterBindData, 'page4_desc__text') || '描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述'}
       </div>
       <RowDivider />
       <div
-        style={{
-          position: "relative",
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '3%',
-          marginTop: '4rem',
-        }}
+        style={
+          isMobile ? {
+            position: "relative",
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '3%',
+            marginTop: '2rem',
+          } :{
+            position: "relative",
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '3%',
+            marginTop: '4rem',
+          }
+        }
       >
         <ListBind
           bindTitle="页面4价格列表"
           bindCode="page4_price_list__list"
-          data={globalDataBindData}
+          data={parameterBindData}
         />
         {
-          JSON.parse(getValue(globalDataBindData, 'page4_price_list__list') || '[]')?.map((item, index) => {
+          JSON.parse(getValue(parameterBindData, 'page4_price_list__list') || '[]')?.map((item, index) => {
             let { code, value } = item;
             return (
               <PriceCard

@@ -6,8 +6,9 @@
   top: 0;
   padding: 1rem;
   width: 100%;
-  height: 2rem;
+  height: 4rem;
   background: #0A0B0D;
+  box-sizing: border-box;
   z-index: 3;
 }
 
@@ -77,4 +78,40 @@
 
 .HeadListItemPopover .ant-popover-inner-content {
   padding: 0 !important;
+}
+
+/* 移动端菜单样式 */
+.mobile-menu {
+  background-color: #0A0B0D;
+  height: 100%;
+  color: white;
+}
+
+.mobile-menu-item {
+  padding: 16px 24px;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.mobile-menu-item:hover {
+  background-color: rgba(132, 226, 216, 0.1);
+}
+
+.mobile-submenu-item {
+  padding: 12px 32px;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.mobile-submenu-item:hover {
+  background-color: rgba(132, 226, 216, 0.1);
+  color: #84e2d8;
+}
+
+.mobile-menu-submenu .mobile-menu-item {
+  font-weight: bold;
+  color: #84e2d8;
 }

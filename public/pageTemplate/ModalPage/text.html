@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // 定义节点类型常量
+    const NodeType = {
+        FAILURE_DESC: "失效现象",
+        PRIMARY_CAUSE: "一级原因",
+        SECONDARY_CAUSE: "二级原因",
+        TERTIARY_CAUSE: "三级原因",
+    };
+
+    // 转换函数
+    function convertToTreeNodes(filterDataList) {
+        // 创建根节点列表
+        const rootNodeList = [];
+
+        // 遍历 filterDataList 中的每一项
+        filterDataList.forEach((item) => {
+            const { treeNodeId, failureDesc, primaryCause, secondaryCause, tertiaryCause } = item;
+
+            // 检查是否存在根节点
+            let rootNode = rootNodeList.find((node) => node.type === NodeType.FAILURE_DESC && node.nodeValue === failureDesc);
+            if (!rootNode) {
+                // 创建新的根节点
+                rootNode = {
+                    title: null,
+                    nodeValue: failureDesc,
+                    canEdit: false,
+                    key: `root_${treeNodeId}`,
+                    type: NodeType.FAILURE_DESC,
+                    children: [],
+                };
+                rootNodeList.push(rootNode);
+            }
+
+            // 检查是否存在一级原因节点
+            let primaryCauseNode = rootNode.children.find((node) => node.type === NodeType.PRIMARY_CAUSE && node.nodeValue === primaryCause);
+            if (!primaryCauseNode) {
+                // 创建新的一级原因节点
+                primaryCauseNode = {
+                    title: null,
+                    nodeValue: primaryCause,
+                    canEdit: false,
+                    key: `primary_${treeNodeId}`,
+                    type: NodeType.PRIMARY_CAUSE,
+                    children: [],
+                };
+                rootNode.children.push(primaryCauseNode);
+            }
+
+            // 检查是否存在二级原因节点
+            let secondaryCauseNode = primaryCauseNode.children.find((node) => node.type === NodeType.SECONDARY_CAUSE && node.nodeValue === secondaryCause);
+            if (!secondaryCauseNode) {
+                // 创建新的二级原因节点
+                secondaryCauseNode = {
+                    title: null,
+                    nodeValue: secondaryCause,
+                    canEdit: false,
+                    key: `secondary_${treeNodeId}`,
+                    type: NodeType.SECONDARY_CAUSE,
+                    children: [],
+                };
+                primaryCauseNode.children.push(secondaryCauseNode);
+            }
+
+            // 检查是否存在三级原因节点
+            if (tertiaryCause) {
+                let tertiaryCauseNode = secondaryCauseNode.children.find((node) => node.type === NodeType.TERTIARY_CAUSE && node.nodeValue === tertiaryCause);
+                if (!tertiaryCauseNode) {
+                    // 创建新的三级原因节点
+                    tertiaryCauseNode = {
+                        title: null,
+                        nodeValue: tertiaryCause,
+                        canEdit: false,
+                        key: `tertiary_${treeNodeId}`,
+                        type: NodeType.TERTIARY_CAUSE,
+                        children: [],
+                    };
+                    secondaryCauseNode.children.push(tertiaryCauseNode);
+                }
+            }
+        });
+
+        return rootNodeList;
+    }
+
+    // 使用示例
+    const filterDataList = [
+        {
+            "treeNodeId": "treeNodeId1706691281314",
+            "failureDesc": "电池包低压",
+            "primaryCause": "电芯因素",
+            "secondaryCause": "析锂",
+            "tertiaryCause": "电解液不足"
+        },
+        {
+            "treeNodeId": "treeNodeId1706691280482",
+            "failureDesc": "电池包低压",
+            "primaryCause": "电芯因素",
+            "secondaryCause": "析锂",
+            "tertiaryCause": "正负极NP比不足"
+        },
+        {
+            "treeNodeId": "treeNodeId1706691280280",
+            "failureDesc": "电池包低压",
+            "primaryCause": "电芯因素",
+            "secondaryCause": "析锂",
+            "tertiaryCause": "负极压死"
+        },
+        {
+            "treeNodeId": "treeNodeId1706691280200",
+            "failureDesc": "电池包低压",
+            "primaryCause": "电芯因素",
+            "secondaryCause": "析锂",
+            "tertiaryCause": "负极露箔"
+        },
+        {
+            "treeNodeId": "treeNodeId1706691249011",
+            "failureDesc": "电池包低压",
+            "primaryCause": "电芯因素",
+            "secondaryCause": "电芯短路",
+            "tertiaryCause": null
+        },
+        {
+            "treeNodeId": "treeNodeId1706691248816",
+            "failureDesc": "电池包低压",
+            "primaryCause": "电芯因素",
+            "secondaryCause": "电芯微短路",
+            "tertiaryCause": null
+        },
+        {
+            "treeNodeId": "treeNodeId1706691335766",
+            "failureDesc": "电池包低压",
+            "primaryCause": "外部因素",
+            "secondaryCause": "电池包经过放电",
+            "tertiaryCause": null
+        },
+        {
+            "treeNodeId": "treeNodeId1706691350745",
+            "failureDesc": "电池包低压",
+            "primaryCause": "外部因素",
+            "secondaryCause": "电池包过放",
+            "tertiaryCause": null
+        },
+        {
+            "treeNodeId": "treeNodeId1706691320909",
+            "failureDesc": "电池包低压",
+            "primaryCause": "外部因素",
+            "secondaryCause": "电池包过充",
+            "tertiaryCause": null
+        }
+    ];
+    const treeNodes = convertToTreeNodes(filterDataList);
+    console.log(treeNodes);
+
+</script>
+
+</html>

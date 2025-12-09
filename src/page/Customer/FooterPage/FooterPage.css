@@ -1,0 +1,27 @@
+.FooterPage {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  background-color: #252525;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.FooterPage .childList {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+}
+
+.FooterPage .childList div:first-child {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.FooterPage .childList div {
+  color: #989898;
+  font-size: 0.75rem;
+  letter-spacing: 0.1rem;
+}

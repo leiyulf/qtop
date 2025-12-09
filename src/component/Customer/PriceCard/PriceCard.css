@@ -1,0 +1,29 @@
+.PriceCard {
+  position: relative;
+  width: 30%;
+  margin-bottom: 2rem;
+}
+
+.PriceCard .Card {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  background: #1A1B1C;
+  border-radius: 0.5rem;
+}
+
+.PriceCard .List {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  gap: 0.5rem;
+}
+
+.PriceCard .ListItem {
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}

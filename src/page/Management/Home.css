@@ -1,0 +1,75 @@
+.Management {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.ManagementHeader {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  width: 100vw;
+  height: 64px;
+  background: #001529;
+}
+
+.ManagementBody {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  width: 100vw;
+  height: calc(100vh - 64px);
+  background: #f0f2f5;
+}
+
+.ManagementContent {
+  position: relative;
+  height: 100%;
+  background: #001529;
+  transition: width 0.2s ease-in-out;
+}
+
+.ManagementContent .ManagementContentInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem 0 0 0;
+  background: #f0f2f5;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.managementHeader {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  width: 100%;
+  height: 64px;
+  margin: 12px 0;
+  padding: 0 1rem;
+  background: white;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.managementHeader .title {
+  position: relative;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.managementBox{
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  height: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}

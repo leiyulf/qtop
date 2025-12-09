@@ -1,13 +1,220 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* 普通浏览器 */
+}
+
+/* 限制滚动条样式仅应用于特定元素内部 */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #cdcdcd;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #ababab;
+}
+
+
+
+/* 客户模式全局 */
+.customerMode .bindComponent {
+  display: none;
+}
+
+.customerMode .titleTag {
+  display: none;
+}
+
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.center {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.underLine::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 3px;
+  background-color: #bae7ff;
+  transition: all 0.3s ease;
+}
+
+.imageBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 全局绑定按钮 */
+.globalBindButton {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -2rem;
+  right: -2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  border: 3px solid #1890ff;
+  background: #e6f7ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.globalBindButton:hover {
+  background: #bae7ff;
+}
+
+/* antd */
+.ant-table-cell {
+  padding: 12px !important;
+}
+
+.ant-pagination {
+  background: white !important;
+  margin: 0 !important;
+  padding: 16px 0 !important;
+  border-top: 1px solid #f0f0f0 !important;
+  box-sizing: border-box !important;
+  border-radius: 0 0 8px 8px !important;
+}
+
+
+/* quill */
+.ql-editor blockquote {
+  border-left: 4px solid #ccc !important;
+  padding-left: 4px !important;
+}
+
+.ql-editor .ql-syntax {
+  background-color: #23241F !important;
+  color: white !important;
+  border-radius: 4px !important;
+  padding: 6px 16px !important;
+}
+
+.ql-editor img {
+  max-width: 100% ! important;
+  height: auto ! important;
+}
+
+.quill .ql-container {
+  border: none ! important;
+  flex: 1 ! important;
+  overflow: auto ! important;
+}
+
+.quill .ql-toolbar {
+  border: none ! important;
+  border-bottom: 1px solid #d0d0d0 ! important;
+}
+
+/* 基本按钮 */
+.normalButton {
+  position: relative;
+  padding: 1.5rem 2.5rem;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #84e2d8, #b2f1e8, #84e2d8);
+  border: 1px solid #84e2d8;
+  color: black;
+  font-weight: 600;
+  border-radius: 2px;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.normalButton:hover {
+  background: linear-gradient(135deg, #b2f1e8, #84e2d8, #b2f1e8);
+}
+
+.hollowOut {
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid white;
+  color: white;
+}
+
+.hollowOut:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 透明滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* 渐变文本 */
+.gradientText {
+  background: linear-gradient(135deg, #13a8a8, #33bcb7, #58d1c9, white, #84e2d8, #58d1c9, #33bcb7, #13a8a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientAnimation 4s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }

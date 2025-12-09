@@ -1,0 +1,19 @@
+.ColorButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #69c0ff;
+  border-radius: 2rem;
+  background: #bae7ff;
+  padding: 0.75rem 1.5rem;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.ColorButton:hover {
+  padding: 0.75rem 1.6rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}

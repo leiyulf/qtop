@@ -1,0 +1,21 @@
+.OperationBtnsPopover {
+  padding: 0 !important;
+}
+
+.OperationBtnsPopover .ant-popover-arrow {
+  display: none !important;
+}
+
+.OperationBtnsPopover .ant-popover-inner-content {
+  padding: 0 !important;
+}
+
+.OperationBtnsPopoverContent {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+  gap: 6px;
+  min-width: 110px;
+  padding: 8px;
+}

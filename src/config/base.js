@@ -1,0 +1,1 @@
+export const fileServer = 'http://171.88.165.162:7000';

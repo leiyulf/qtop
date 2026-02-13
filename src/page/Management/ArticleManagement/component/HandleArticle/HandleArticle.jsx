@@ -10,6 +10,7 @@ import { createArticle, updateArticle } from '@/service/ArticleManagement';
 import ReactQuill from 'react-quill';
 import useElementSize from '@/component/UseHooks/useElementSize';
 import PageLoading from '@/component/Global/PageLoading/PageLoading';
+import QuillBox from '@/component/Global/QuillBox/QuillBox';
 
 //方法
 import { resultTip } from '@/utils/lyTool';
@@ -200,6 +201,7 @@ const HandleArticle = (props) => {
         body: { padding: '0px', background: '#F0F2F5' },
         header: { borderBottom: '1px solid #001529', background: '#001529', color: 'white' }
       }}
+      push={false}
       extra={
         <>
           <Button
@@ -266,7 +268,7 @@ const HandleArticle = (props) => {
           <div ref={boxRef} className="quillBox">
             {
               boxWidth && boxHeight && (
-                <ReactQuill
+                <QuillBox
                   ref={quillRef}
                   value={content}
                   onChange={(value) => {
@@ -280,6 +282,9 @@ const HandleArticle = (props) => {
                     height: `${boxHeight - 2}px`,
                     borderRadius: '8px',
                     border: '1px solid #d9d9d9'
+                  }}
+                  onCopy={(htmlValue) => {
+                    setContent(pre => pre + htmlValue);
                   }}
                 />
               )

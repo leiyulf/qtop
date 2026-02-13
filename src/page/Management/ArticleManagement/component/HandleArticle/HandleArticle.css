@@ -26,7 +26,7 @@
   width: 50%;
   height: 100%;
   padding: 16px;
-  border-left: 2px solid #001529;
+  border-left: 1px solid #b9b9b9;
   background: #F0F2F5;
   box-sizing: border-box;
 }
@@ -34,7 +34,7 @@
 .HandleArticle .quillBox {
   position: relative;
   flex: 1;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .HandleArticle .previewTitle {

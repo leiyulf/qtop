@@ -1,0 +1,68 @@
+.exitHtmlBox {
+  position: relative;
+  overflow: visible;
+}
+
+.exitHtmlBox .toolButtons {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  right: 3rem;
+  bottom: 3rem;
+}
+
+.exitHtmlBox .toolButtons .toolButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid #1677ff;
+  background: white;
+  box-shadow: 2px 3px 6px 0rem rgb(189 189 189);
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.exitHtmlBox .toolButtons .toolButton:hover {
+  background: #e6f4ff;
+  color: white;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  transform: scale(1.0);
+}
+
+/* ai */
+.aiBox {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  height: calc(100% - 2px);
+  right: -670px;
+  bottom: 0;
+  background: white;
+  border: 2px solid #001529;
+  border-radius: 6px;
+  box-shadow: 0 0 6px 0 rgb(181 181 181);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.aiBox .promptItem *{
+  font-size: 0.8rem;
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+.aiBox .htmlBox * {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}

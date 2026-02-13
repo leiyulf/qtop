@@ -1,0 +1,190 @@
+.dataStorage {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  border-radius: 4px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(22, 119, 255, 0.08), transparent 55%),
+    #ffffff;
+}
+
+.dataStorageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dataStorageHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dataStorageTitleIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #1677ff, #52c41a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  /* box-shadow: 0 6px 18px rgba(22, 119, 255, 0.4); */
+  font-size: 18px;
+}
+
+.dataStorageTitleInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.dataStorageTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.dataStorageSubTitle {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.dataStorageRefreshBtn {
+  border-radius: 999px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+}
+
+.dataStorageDivider {
+  margin: 8px 0 12px;
+}
+
+.dataStorageLoading,
+.dataStorageEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.dataStorageList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.dataStorageCard {
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: #fefeff;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.dataStorageCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+  border-color: rgba(37, 99, 235, 0.75);
+}
+
+/* 调整 Antd Card 内部间距和背景 */
+.dataStorageCard .ant-card-body {
+  padding: 10px 12px 10px;
+}
+
+/* 标题行 */
+.dataStorageCard .ant-card-head {
+  min-height: 36px;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.03), transparent);
+}
+
+.dataStorageCard .ant-card-head-title {
+  padding: 8px 0;
+}
+
+.dataStorageCardTitle {
+  font-weight: 600;
+  font-size: 13px;
+  color: #111827;
+}
+
+/* 状态 Tag */
+.dataStorageStatusTag {
+  border-radius: 999px !important;
+  padding: 0 10px;
+  font-size: 11px;
+}
+
+.dataStorageCardDesc {
+  margin-bottom: 8px;
+  color: #4b5563;
+  font-size: 12px;
+  line-height: 1.5;
+  max-height: 3.2em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 指标块 */
+.dataStorageCardStats {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.dataStorageCardStat {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(219, 234, 254, 0.9);
+  font-size: 11px;
+  color: #1e3a8a;
+  white-space: nowrap;
+}
+
+.dataStorageCardStatIcon {
+  font-size: 13px;
+}
+
+.dataStorageCardStatLabel {
+  opacity: 0.8;
+}
+
+.dataStorageCardStatValue {
+  font-weight: 600;
+}
+
+/* 时间信息 */
+.dataStorageCardTime {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #6b7280;
+  border-top: 1px dashed rgba(148, 163, 184, 0.5);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.dataStorageCardTimeLabel {
+  opacity: 0.9;
+}
+
+.dataStorageCardTimeValue {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}

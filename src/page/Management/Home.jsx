@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, Button, Input, Form, message, Tabs, DatePicker, InputNumber, Table, Popconfirm, Select, Tag, Divider, Modal } from 'antd';
 import moment from 'moment';
-import { AuditOutlined, FormOutlined, PieChartOutlined, WechatOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SearchOutlined, AppstoreOutlined, BellOutlined } from '@ant-design/icons';
+import { AuditOutlined, FormOutlined, PieChartOutlined, WechatOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SearchOutlined, AppstoreOutlined, BellOutlined, BulbOutlined, PartitionOutlined } from '@ant-design/icons';
 
 //接口
 
 //组件
 import PageLoading from '@/component/Global/PageLoading/PageLoading';
+import QtopAi from '@/component/Global/QtopAi/QtopAi';
 
 //页面
 import CustomerHome from '@/page/Customer/Home.jsx';
 import MessageManagement from './MessageManagement/MessageManagement';
 import LogManagement from './LogManagement/LogManagement';
 import ArticleManagement from './ArticleManagement/ArticleManagement';
+import QTopAgent from './QTopAgent/QTopAgent';
+import TestManagement from './TestManagement/TestManagement';
+
 
 //方法
 
@@ -33,13 +37,15 @@ const Home = (props) => {
   const [loading, setLoading] = useState(false);
   const [menuKey, setMenuKey] = useState('home');
   const [collapsed, setCollapsed] = useState(false);
-  const [showMask, setShowMask] = useState(true); // 新增遮罩状态
+  const [showMask, setShowMask] = useState(false); // 新增遮罩状态
   const [password, setPassword] = useState(''); // 新增密码状态
   const [menuItems, setMenuItems] = useState([
     { key: 'home', icon: <FormOutlined />, label: '首页管理' },
     { key: 'article', icon: <AuditOutlined />, label: '文章管理' },
     { key: 'message', icon: <WechatOutlined />, label: '留言列表' },
-    { key: 'log', icon: <SearchOutlined />, label: '日志管理' }
+    { key: 'log', icon: <SearchOutlined />, label: '日志管理' },
+    { key: 'qtopAgent', icon: <PartitionOutlined />, label: '智能体' },
+    { key: 'test', icon: <AppstoreOutlined />, label: '测试' },
   ]);
 
   //useEffect
@@ -103,7 +109,9 @@ const Home = (props) => {
 
               {/* 功能按钮组 */}
               <div style={{ display: 'flex', gap: '2rem', marginRight: '2rem' }}>
-                <AppstoreOutlined style={{ fontSize: '1.6rem', color: 'white' }} />
+                <QtopAi>
+                  <BulbOutlined style={{ fontSize: '1.6rem', color: 'white' }} />
+                </QtopAi>
                 <BellOutlined style={{ fontSize: '1.6rem', color: 'white' }} />
               </div>
             </div>
@@ -125,7 +133,9 @@ const Home = (props) => {
                   {menuKey == 'home' && <CustomerHome rule="admin" />}
                   {menuKey == 'message' && <MessageManagement />}
                   {menuKey == 'log' && <LogManagement />}
+                  {menuKey == 'qtopAgent' && <QTopAgent />}
                   {menuKey == 'article' && <ArticleManagement />}
+                  {menuKey == 'test' && <TestManagement />}
                 </div>
               </div>
             </div>

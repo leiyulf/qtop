@@ -39,3 +39,19 @@ export async function deleteArticle(query = {}) {
     data: query,
   });
 }
+
+export async function batchCreateArticle(query = {}) {
+  return request(
+    '/ai/lang/article/start', {
+    method: 'POST',
+    data: query,
+  });
+}
+
+export async function stopCreateArticle(query = {}) {
+  return request(
+    '/ai/lang/article/stop', {
+    method: 'POST',
+    data: query,
+  });
+}

@@ -8,6 +8,7 @@ import moment from 'moment';
 import HeaderBar from '@/component/Customer/HeaderBar/HeaderBar';
 import TextBind from '@/component/Global/TextBind/TextBind';
 import ImageBind from '@/component/Global/ImageBind/ImageBind';
+import AnimatedContent from '@/component/Gsap/AnimatedContent/AnimatedContent';
 
 //方法
 import { useSelector } from 'react-redux';
@@ -167,6 +168,7 @@ const HomePage = (props) => {
               <a href="#Page3" className='hollowOut normalButton'>
                 解决方案
               </a>
+              
             </div>
           </div>
         </div>

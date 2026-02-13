@@ -13,6 +13,7 @@ import Stick from '@/component/Global/Stick/Stick';
 import HandleArticle from './component/HandleArticle/HandleArticle';
 import PreviewArticle from './component/PreviewArticle/PreviewArticle';
 import CoverUploadCell from './component/CoverUploadCell/CoverUploadCell';
+import HandleBatchArticle from './component/HandleBatchArticle/HandleBatchArticle';
 
 //方法
 import { resultTip } from '@/utils/lyTool';
@@ -185,6 +186,10 @@ const ArticleManagement = (props) => {
   const [handleVisible, setHandleVisible] = useState(false);
   const [handleData, setHandleData] = useState({});
 
+  //批量添加文章
+  const [handleBatchVisible, setHandleBatchVisible] = useState(false);
+  const [handleBatchData, setHandleBatchData] = useState({});
+
   //预览文章
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewData, setPreviewData] = useState({});
@@ -259,15 +264,26 @@ const ArticleManagement = (props) => {
       <div className='managementHeader'>
         <div className='title'><UnorderedListOutlined style={{ marginRight: '0.5rem' }} />文章管理</div>
         <div style={{ flex: 1 }} />
-        <Button
-          type="primary"
-          onClick={() => {
-            setHandleVisible(true);
-            setHandleData({});
-          }}
-        >
-          添加文章
-        </Button>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <Button
+            type="primary"
+            onClick={() => {
+              setHandleVisible(true);
+              setHandleData({});
+            }}
+          >
+            添加文章
+          </Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              setHandleBatchVisible(true);
+              setHandleBatchData({});
+            }}
+          >
+            批量添加文章
+          </Button>
+        </div>
         <Stick />
         <Form
           layout="inline"
@@ -315,6 +331,20 @@ const ArticleManagement = (props) => {
             drawerVisible={handleVisible}
             setDrawerVisible={setHandleVisible}
             drawerData={handleData}
+            onSub={() => {
+              refreshDataList(tableFilter);
+            }}
+          />
+        )
+      }
+
+      {/* 批量添加文章 */}
+      {
+        handleBatchVisible && (
+          <HandleBatchArticle
+            drawerVisible={handleBatchVisible}
+            setDrawerVisible={setHandleBatchVisible}
+            drawerData={handleBatchData}
             onSub={() => {
               refreshDataList(tableFilter);
             }}

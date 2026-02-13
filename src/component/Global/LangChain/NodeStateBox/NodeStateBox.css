@@ -1,0 +1,288 @@
+.NodeStateBox {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 4px 12px 12px;
+  background: white;
+  /* background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); */
+  border: 1px solid #7dd3fc;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.15);
+  min-width: 200px;
+  max-width: 240px;
+  height: fit-content;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 缩小状态 */
+.NodeStateBox.collapsed {
+  min-width: auto;
+  max-width: none;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* 头部样式 */
+.statusHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.totalCount {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.countLabel {
+  color: #0369a1;
+  font-weight: 500;
+}
+
+.countValue {
+  color: #0284c7;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.collapseBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.collapseBtn:hover {
+  background: #f3f4f6;
+  transform: scale(1.1);
+}
+
+/* 缩小视图 */
+.collapsedView {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.collapsedView:hover {
+  transform: scale(1.05);
+}
+
+.collapsedIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.collapsedCount {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0284c7;
+  margin-top: -2px;
+}
+
+.expandBtn {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.collapsedView:hover .expandBtn {
+  opacity: 1;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.NodeStateBoxContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 138px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+}
+
+.NodeStateBoxContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.NodeStateBoxContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.NodeStateBoxContainer::-webkit-scrollbar-thumb {
+  background: #7dd3fc;
+  border-radius: 3px;
+}
+
+.NodeStateBoxContainer::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+.NodeStateBoxNode {
+  background: white;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  padding: 10px 12px;
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 4px rgba(14, 165, 233, 0.1);
+  position: relative;
+  overflow: hidden;
+  transform-origin: center;
+}
+
+.NodeStateBoxNode::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(180deg, #0ea5e9 0%, #38bdf8 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.NodeStateBoxNode:hover {
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+}
+
+.NodeStateBoxNode:hover::before {
+  width: 4px;
+}
+
+.nodeContent {
+  width: 100%;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.4;
+  transition: transform 0.3s ease;
+}
+
+/* 新节点从下往上推入动画 */
+.nodeSlideUp {
+  animation: slideUpPush 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUpPush {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 光晕效果 */
+/* .nodeSlideUp::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  animation: glowPulse 0.8s ease-out;
+  pointer-events: none;
+  border-radius: 4px;
+} */
+
+@keyframes glowPulse {
+  0% {
+    opacity: 1;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+
+/* 旧节点淡出过渡 */
+.NodeStateBoxNode {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 空状态样式 */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  /* min-height: 150px; */
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.emptyIcon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.emptyText {
+  font-size: 13px;
+  color: #a0a0b0;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}

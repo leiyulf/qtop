@@ -1,0 +1,48 @@
+.nodeText {
+  font-size: 14px;
+  color: #333;
+  line-height: 28px;
+  /* 自动换行 */
+  word-break: break-all;
+  white-space: pre-wrap;
+  overflow: auto;
+}
+
+.nodeMap{
+  position: relative;
+  min-width: 300px;
+  max-width: 600px;
+  padding: 4px;
+  margin: 4px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  overflow: auto;
+}
+
+.nodeTable{
+  position: relative;
+  min-width: 300px;
+  max-width: 600px;
+  padding: 4px;
+  margin: 4px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  overflow: auto;
+}
+
+.nodeTableEdit{
+  position: relative;
+  min-width: 300px;
+  max-width: 600px;
+  overflow: auto;
+}
+
+.nodeInteraction{
+  position: relative;
+  min-width: 300px;
+  max-width: 600px;
+  padding: 8px;
+  margin: 4px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+}

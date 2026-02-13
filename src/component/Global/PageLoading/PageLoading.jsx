@@ -38,7 +38,7 @@ const PageLoading = (props) => {
       <Spin spinning={loading} />
       {
         context && (
-          <div style={{ marginTop: "16px", fontSize: "2rem", letterSpacing: "0.1rem", color: "#f5222d", fontWeight: "bold" }}>
+          <div style={{ marginTop: "16px", fontSize: "1rem", letterSpacing: "0.1rem", color: "#9d9d9d", fontWeight: "bold" }}>
             {context}
           </div>
         )

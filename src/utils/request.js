@@ -37,11 +37,18 @@ const errorHandler = (error) => {
     });
   } else if (!response) {
     notification.error({
-      description: '您的网络发生异常，无法连接服务器',
+      description: '您的网络发生异常,无法连接服务器',
       message: '网络异常',
     });
   }
-  return Promise.reject(error);
+  // 返回一个包含错误信息的对象,而不是抛出错误
+  // 这样外层的 try-catch 可以正常工作
+  return {
+    success: false,
+    message: response?.statusText || '请求失败',
+    error: error,
+    data: null
+  };
 };
 
 /**

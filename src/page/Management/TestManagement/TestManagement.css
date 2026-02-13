@@ -1,0 +1,36 @@
+.TestManagement {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+  border: 2px solid rgb(203, 203, 203);
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* Canvas 容器样式 */
+.TestManagement canvas {
+  display: block;
+  outline: none;
+}
+
+/* 自定义滚动条 */
+.TestManagement ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.TestManagement ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.TestManagement ::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.TestManagement ::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

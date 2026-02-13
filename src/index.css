@@ -36,7 +36,22 @@ body {
   background: #ababab;
 }
 
+/* 基础样式 */
+p {
+  margin: 0;
+}
 
+h1 {
+  margin: 8px 0;
+}
+
+h2 {
+  margin: 6px 0;
+}
+
+h3 {
+  margin: 4px 0;
+}
 
 /* 客户模式全局 */
 .customerMode .bindComponent {
@@ -49,12 +64,14 @@ body {
 
 
 .row {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
 .column {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,6 +108,21 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.title{
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.label{
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  text-align: right;
+  padding-right: 8px;
 }
 
 /* 全局绑定按钮 */
